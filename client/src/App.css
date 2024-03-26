@@ -1,0 +1,48 @@
+@import '~antd/dist/reset.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
+/* index.css */
+.product-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 20px;
+}
+.button-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-button {
+  background-color: #8a2be2;
+  color: white;
+  flex: 0 1 auto；
+}
+
+.edit-button {
+  flex:0 1 auto;
+  min-width: '300px'
+}
+
+.image-container {
+  padding: 10px;
+  border-radius: 0%;
+}
+
+.product-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.product-detail-info {
+  display: flex;
+}
+
+.detail-img {
+  max-width: 100%;
+}
+
+.detail-btn-list {
+  display: flex;
+  gap:10px
+}
