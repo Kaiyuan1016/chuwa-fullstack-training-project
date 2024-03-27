@@ -1,8 +1,23 @@
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { selectProductById } from "./features/product/productsSlice";
+import { useSelector } from "react-redux";
 
 const ProductDetail = () => {
-    const location = useLocation();
-    const product = location.state;
+    const {productId} = useParams();
+    const [isLoading, setIsLoading] = useState(false);
+    const product = useSelector((state) => selectProductById(state, productId));
+
+    useEffect(() => {
+        if(product) {
+            setIsLoading(false);
+        }
+    }, [product]);
+
+    if(!product) {
+        return <div>Loading...</div>;
+    }
+
     return(
         <div>
             <h2>Product Detail</h2>

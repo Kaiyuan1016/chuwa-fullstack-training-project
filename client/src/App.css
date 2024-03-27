@@ -8,21 +8,77 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
 }
+
+.card {
+  width: 242px;
+  height: 303px;
+  /* top: 222px; */
+  padding: 10px;
+  border-radius: 0%;
+}
+
+.info-container {
+  width: 191px;
+  height: 45px;
+  gap: 0%;
+}
+
+.card-img-top {
+  width: 218px;
+  height: 198px;
+}
+
 .button-list {
   display: flex;
+  flex-direction: row;
+  gap: 6px;
   justify-content: space-between;
 }
 
+.button-base {
+  width: 110px;
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
 .add-button {
-  background-color: #8a2be2;
+  background-color: #5048E5;
   color: white;
-  flex: 0 1 auto；
 }
 
 .edit-button {
-  flex:0 1 auto;
-  min-width: '300px'
+  border: 1px #CCCCCC solid;
 }
+
+.ant-pagination-item,
+.ant-pagination-item-link {
+  color: #5048E5 !important;
+  border-radius: 0%;
+}
+
+.ant-pagination-item:hover,
+.ant-pagination-item-link:hover {
+  background-color: #5048E5 !important;
+  color: white !important;
+  border-radius: 0%;
+}
+
+.ant-pagination-item-active {
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .product-list {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
 
 .image-container {
   padding: 10px;
