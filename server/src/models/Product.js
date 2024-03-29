@@ -23,6 +23,10 @@ const ProductSchema = new Schema({
     },
     imageLink: {
         type: String
+    },
+    createTime: {
+        type: Date,
+        default: Date.now
     }
 })
 

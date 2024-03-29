@@ -1,9 +1,27 @@
 const { Product } = require('../models/Product');
 
 getAllProducts = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = parseInt(req.query.pageSize) || 10;
+    const sortBy = req.query.sortBy || 'createAt';
+    const sortOrder = req.query.sortOrder || 'asc';
+    
+    const skip = (page - 1) * pageSize;
+    const sort = {};
+    sort[sortBy] = sortOrder === 'asc' ? 1 : -1;
+
     try {
-        const products = await Product.find();
-        res.json(products);
+        const products = await Product.find()
+            .sort(sort)
+            .skip(skip)
+            .limit(pageSize);
+        const totalCount = await Product.countDocuments();
+        const totalPages = Math.ceil(totalCount / pageSize);
+        res.json(
+            products,
+            // currentPage: page,
+            // totalPages: totalPages
+        );
     } catch(err) {
         res.status(500).json({message: err.message});
     }

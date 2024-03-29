@@ -1,5 +1,5 @@
-@import '~antd/dist/reset.css';
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~antd/dist/reset.css";
+@import "~bootstrap/dist/css/bootstrap.min.css";
 
 /* index.css */
 .product-list {
@@ -26,6 +26,7 @@
 .card-img-top {
   width: 218px;
   height: 198px;
+  object-fit: cover;
 }
 
 .button-list {
@@ -77,8 +78,22 @@
     align-items: center;
     flex-direction: column;
   }
+  .product-detail-container {
+    grid-template-columns: 1fr; /* Change to single column for smaller screens */
+    grid-template-areas:
+      "h2"
+      "detail-img"
+      "detail-info";
+  }
+  .detail-img {
+    width: 308px;
+    height: 276px;
+  }
 }
 
+.h2 {
+  grid-area: h2;
+}
 
 .image-container {
   padding: 10px;
@@ -87,18 +102,41 @@
 
 .product-detail-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* First column auto-sized, second column takes the remaining space */
+  grid-template-areas:
+    "h2 h2"
+    "detail-img detail-info"; 
+  gap:20px;
+  top: 238px;
+  left: 103px;
 }
 
-.product-detail-info {
-  display: flex;
+.detail-button-base {
+  width: 133px;
+  height: 40px;
 }
 
 .detail-img {
-  max-width: 100%;
+  grid-area: detail-img; 
+  width: 662px;
+  height: 597px;
+  object-fit: contain;
 }
-
+.detail-info {
+  grid-area: detail-info;
+}
 .detail-btn-list {
   display: flex;
   gap:10px
+}
+
+.out-of-stock-btn {
+  width: 76px;
+  height: 30px;
+  border-radius: 4px;
+  background-color: rgba(234, 61, 47, 0.13);
+  color: #EA3D2F;
+  font-size: 12px; /* Adjust font size as needed */
+  white-space: nowrap; /* Prevent text from wrapping */
+  border: none;
 }

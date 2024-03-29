@@ -6,15 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const ProductCard = ({product}) => {
     const navigate = useNavigate();
     const handleClick = (id) => {
-        // console.log(id);
-        return(
-          navigate(`/products/${id}`)
-        );
-    }
+        return navigate(`/products/${id}`)
+    };
 
-    // if(!product) {
-    //     return <div>Loading...</div>;
-    // }
+    const handleEdit = (id) => {
+        return navigate(`/products/edit/${id}`);
+    };
 
     return (
         <div className="card">
@@ -30,7 +27,7 @@ const ProductCard = ({product}) => {
                 </div>
                 <div className='button-list'>
                     <AddButton />
-                    <button className="btn edit-button button-base">Edit</button>
+                    <button className="btn edit-button button-base" onClick={() => handleEdit(product._id)}>Edit</button>
                 </div>
             
         </div>
