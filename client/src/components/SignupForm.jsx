@@ -92,7 +92,7 @@ import {
             />
             <Button
               variant="contained"
-              color="secondary"
+              color="primary"
               sx={{ width: "100%", textTransform: "none" }}
               onClick={handleSignup}
               disabled={loading}
