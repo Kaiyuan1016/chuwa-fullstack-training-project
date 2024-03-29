@@ -6,6 +6,7 @@ import ProductDetail from './ProductDetail';
 
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import ProductsPage from './ProductsPage';
+import SignUp from './pages/Signup';
 
 export default function App () {
   return(
@@ -14,6 +15,7 @@ export default function App () {
         <Route path='/' element={<ProductsPage />} />
         <Route path='/products' element={<ProductsPage />} />
         <Route path='/products/:productId' element={<ProductDetail />} />
+        <Route path='/signup' element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );
