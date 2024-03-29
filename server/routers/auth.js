@@ -35,7 +35,7 @@ router.post("/login", async (req, res, next) => {
       expiresIn: "30d",
     });
 
-    // Retrieve user's shopping cart
+
     const cart = await Cart.findOne({ user: user._id }).populate(
       "items.product"
     );
@@ -46,22 +46,19 @@ router.post("/login", async (req, res, next) => {
         totalPrice += item.quantity * item.product.price;
       });
       const taxRate = 0.07;
-      let tax = totalPrice * taxRate; // tax is now calculated based on the totalPrice
+      let tax = totalPrice * taxRate; 
       totalPrice += tax;
 
       cartDetails = {
         cart: cart,
-        totalPrice: totalPrice.toFixed(2), // Convert to a string with 2 decimal places
+        totalPrice: totalPrice.toFixed(2), 
         tax: tax.toFixed(2),
       };
     }
 
-    // remove the user from black list
-    // or authentication middleware might block the user
     req.app.locals.blackList.delete(user._id.toString());
     console.log("after login: ", req.app.locals.blackList);
 
-    // Send the JWT token and cart details in the response
     res.json({ token: jwtToken, role: user.role, cart: cartDetails });
   } catch (err) {
     next(err);
