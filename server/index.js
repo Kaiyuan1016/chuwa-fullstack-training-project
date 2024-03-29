@@ -9,12 +9,15 @@ const bodyParser = require('body-parser');
 
 const userRouter = require('./routers/user')
 const productRouter = require('./routers/product');
+const errorHandleMiddleware = require("./handlers/ErrorHandlers");
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 
 app.use('/', productRouter);
 app.use('/', userRouter);
+app.use(errorHandleMiddleware);
 
 connectDB();
 
