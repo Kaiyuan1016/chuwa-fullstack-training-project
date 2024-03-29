@@ -92,13 +92,20 @@ import {
             />
             <Button
               variant="contained"
-              color="primary"
-              sx={{ width: "100%", textTransform: "none" }}
-              onClick={handleSignup}
-              disabled={loading}
-            >
-              {loading ? "Loading" : "Sign Up"}
-            </Button>
+              sx={{
+              width: "100%",
+              textTransform: "none",
+              backgroundColor: '#5048E5', // Set the button color
+              '&:hover': {
+                backgroundColor: '#4038d5', // Darken the button color slightly on hover for feedback
+              },
+            }}
+            onClick={handleSignup}
+            disabled={loading}
+          >
+            {loading ? "Loading" : "Sign Up"}
+          </Button>
+
             <Stack
               direction="row"
               justifyContent="space-between"
