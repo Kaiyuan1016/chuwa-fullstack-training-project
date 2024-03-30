@@ -74,7 +74,7 @@ const ProductForm = () => {
     };
 
     return (
-        <div style={{ backgroundColor: '#F1F1F1' }}>
+        <div>
             <div style={{textAlign: 'center'}}>
                 <h4>{isEditRoute ? 'Edit Product' : 'Create Product'}</h4> 
             </div>

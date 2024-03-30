@@ -1,0 +1,34 @@
+/* PageHeader.css */
+.page-header {
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #111827;
+    color: white;
+}
+
+.search-bar input {
+    width: 200px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.search-bar button {
+    padding: 5px 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.cart-info {
+    display: flex;
+    align-items: center;
+}
+
+.cart-total-price {
+    margin-left: 10px;
+}

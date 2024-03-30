@@ -1,0 +1,6 @@
+.cart-container {
+    width: 542px;
+    height: 81px;
+    display: flex;
+    flex-direction: column;
+}

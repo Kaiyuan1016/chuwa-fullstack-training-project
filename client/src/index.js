@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store from './features/product/store';
+import store from './features/store';
 import { Provider } from 'react-redux';
+import PageHeader from './components/PageHeader';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
-    <App />
+    <PageHeader />
+    <div style={{ backgroundColor: '#F1F1F1', padding:'50px' }}>
+      <App />
+    </div>
   </Provider>
 );
 

@@ -26,7 +26,7 @@ const ProductCard = ({product}) => {
                     <div style={{fontStyle: 'inter', fontSize: '16px', fontWeight: '600'}}>${product.price}</div>
                 </div>
                 <div className='button-list'>
-                    <AddButton />
+                    <AddButton product={product} />
                     <button className="btn edit-button button-base" onClick={() => handleEdit(product._id)}>Edit</button>
                 </div>
             

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ProductPagination from './Pagination';
@@ -16,8 +16,8 @@ function ProductsPage() {
     const pageSize = 10;
 
     useEffect(() => {
-        // console.log('hey');
         if(status === 'idle') {
+            // TODO: load cart for logged in user
             dispatch(fetchProducts({page: localStorage.getItem('currentPage'), pageSize: pageSize, sortBy: localStorage.getItem('sortBy'), sortOrder: localStorage.getItem('sortOrder')}));
         }
         
@@ -65,8 +65,8 @@ function ProductsPage() {
     }
 
     return (
-      <div style={{ top: '128px', padding: '0 24px', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', padding:'20px'}}>
+      <div style={{ position: 'relative', width:'1323px', display: 'flex', flexDirection: 'column', marginLeft: 'auto', marginRight: 'auto' }}>
+        <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'20px'}}>
             <h4>Products</h4>
             <div>
                 <Select style={{width: '179px', height:'40px', marginRight:'20px'}} defaultValue='Sort' onChange={sortProducts}>

@@ -3,10 +3,14 @@
 
 /* index.css */
 .product-list {
+  width:1323px;
+  height: 682px;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
+  background-color: white;
+  padding: 20px;
 }
 
 .card {
@@ -104,11 +108,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr; /* First column auto-sized, second column takes the remaining space */
   grid-template-areas:
-    "h2 h2"
     "detail-img detail-info"; 
-  gap:20px;
-  top: 238px;
-  left: 103px;
+  padding:20px;
+  width: 1323px;
+  position: relative;
 }
 
 .detail-button-base {
@@ -120,10 +123,14 @@
   grid-area: detail-img; 
   width: 662px;
   height: 597px;
+  margin-top: auto;
+  margin-bottom: auto;
   object-fit: contain;
 }
 .detail-info {
   grid-area: detail-info;
+  margin-top: 20px;
+  margin-bottom: auto;
 }
 .detail-btn-list {
   display: flex;
