@@ -111,13 +111,13 @@ const LoginForm = ({ userFormHooks }) => {
                   <UnderlinedButton>Sign up</UnderlinedButton>
                 </Link>
               </Typography>
-              <Link to="/update-password">
+              <Link to="/updatepassword">
                 <Typography sx={{ display: { xs: "none", sm: "block" } }}>
                   <UnderlinedButton>Forgot password</UnderlinedButton>
                 </Typography>
               </Link>
             </Stack>
-            <Link to="/update-password">
+            <Link to="/updatepassword">
               <Typography sx={{ display: { xs: "block", sm: "none" } }}>
                 <UnderlinedButton>Forgot password</UnderlinedButton>
               </Typography>

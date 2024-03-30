@@ -115,7 +115,7 @@ import {
             >
               <Typography>
                 Already have an account?
-                <Link to="/">
+                <Link to="/login">
                   <UnderlinedButton>Sign in</UnderlinedButton>
                 </Link>
               </Typography>
