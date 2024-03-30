@@ -18,10 +18,10 @@ const metricsSlice = createSlice({
   initialState: initialProductListMetricsState,
   reducers: {
     set(state, action) {
-      (state.page = action.payload.page || state.page),
-        (state.size = action.payload.size || state.size),
-        (state.sort = action.payload.sort || state.sort),
-        (state.order = action.payload.order || state.order);
+      state.page = action.payload.page || state.page;
+      state.size = action.payload.size || state.size;
+      state.sort = action.payload.sort || state.sort;
+      state.order = action.payload.order || state.order;
       state.optionName = action.payload.optionName || state.optionName;
     },
   },

@@ -9,10 +9,14 @@ import ProductsPage from './ProductsPage';
 import SignUp from './pages/Signup';
 import Login from './pages/Login';
 import UpdatePassword from './pages/UpdatePassword';
+import Header from'./components/Header';
+import Footer from'./components/Footer';
+
 
 export default function App () {
   return(
     <BrowserRouter>
+      <Header />
       <Routes>
         <Route path='/' element={<ProductsPage />} />
         <Route path='/products' element={<ProductsPage />} />
@@ -22,6 +26,7 @@ export default function App () {
         <Route path='/updatepassword' element={<UpdatePassword/>} />
 
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
