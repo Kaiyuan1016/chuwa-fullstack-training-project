@@ -96,7 +96,7 @@ const LoginForm = ({ userFormHooks }) => {
             onClick={handleSignIn}
             disabled={loading}
           >
-            {loading ? "Loading" : "Sign Up"}
+            {loading ? "Loading" : "Log In"}
           </Button>
             <Stack
               direction="row"
