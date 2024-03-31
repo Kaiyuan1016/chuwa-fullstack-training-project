@@ -64,12 +64,22 @@ function ProductsPage() {
         return <div>Error: {error}</div>
     }
 
+    let currentSort;
+    const sortBy = localStorage.getItem('sortBy');
+    const sortOrder = localStorage.getItem('sortOrder');
+    if(sortBy && sortOrder) {
+        if(sortBy === 'price') {
+            currentSort = sortOrder === 'asc' ? 'priceAsc' : 'priceDesc';
+        } else {
+            currentSort = 'createTimeAsc';
+        }
+    }
     return (
       <div style={{ position: 'relative', width:'1323px', display: 'flex', flexDirection: 'column', marginLeft: 'auto', marginRight: 'auto' }}>
         <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'20px'}}>
             <h4>Products</h4>
             <div>
-                <Select style={{width: '179px', height:'40px', marginRight:'20px'}} defaultValue='Sort' onChange={sortProducts}>
+                <Select style={{width: '179px', height:'40px', marginRight:'20px'}} defaultValue='Sort' onChange={sortProducts} value={currentSort}>
                     <Select.Option value="createTimeAsc">Last added</Select.Option>
                     <Select.Option value="priceAsc">Price: low to high</Select.Option>
                     <Select.Option value="priceDesc">Price: high to low</Select.Option>

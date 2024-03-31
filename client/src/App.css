@@ -131,6 +131,7 @@
   grid-area: detail-info;
   margin-top: 20px;
   margin-bottom: auto;
+  margin-left: 20px;
 }
 .detail-btn-list {
   display: flex;

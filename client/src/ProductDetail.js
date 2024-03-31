@@ -33,7 +33,7 @@ const ProductDetail = () => {
     return(
         <div style={{marginLeft: 'auto', marginRight: 'auto'}}>
             <h2 className="h2">Product Detail</h2>
-            <div className="product-detail-container" style={{width: '1323px', height:'682px', backgroundColor:'white'}}>
+            <div className="product-detail-container" style={{width: '1323px', height:'682px', backgroundColor:'white', padding:'20px'}}>
             <img className="detail-img" src={product.imageLink} alt="ProductImage"/>
             <div className="detail-info">
                 <p style={{color: '#6B7280'}}>{product.category}</p>

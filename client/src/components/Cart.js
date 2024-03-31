@@ -1,15 +1,21 @@
 import React from 'react';
-import { Badge, Modal } from 'antd';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { useSelector } from 'react-redux';
+import { Modal } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
 import AddToCartButton from '../AddButton';
+import { removeItemFromCart } from '../features/cart/cartSlice';
 
 const Cart = ({ visible, onClose }) => {
 
 	const cart = useSelector(state => state.cart.items);
     const itemCount = Array.isArray(cart) ? cart.reduce((total, item) => total += item.quantity, 0) : 0;
 	const totalPrice = Array.isArray(cart) ? cart.reduce((total, item) => total += item.productInfo.price * item.quantity, 0) : 0;
-  return (
+    const dispatch = useDispatch();
+  
+	const handleRemove = (productId) => {
+		dispatch(removeItemFromCart({id: productId}));
+	};
+
+	return (
     <Modal
 	visible={visible}
 	onCancel={onClose}
@@ -25,7 +31,7 @@ const Cart = ({ visible, onClose }) => {
 		</header>
         <div>
 			{cart?.map((item) => (
-				<div style={{display: 'flex', flexDirection: 'row', width: '460px', height:'120px', gap:'10px', marginBottom: '10px'}}>
+				<div key={item.id} style={{display: 'flex', flexDirection: 'row', width: '460px', height:'120px', gap:'10px', marginBottom: '10px'}}>
 					<img src={item.productInfo.imageLink} />
 					<div style={{display: 'flex', flexDirection:'column', justifyContent:'space-between'}}>
 						<div style={{display: 'flex',flexDirection: 'row', justifyContent:'space-between'}}>
@@ -34,7 +40,7 @@ const Cart = ({ visible, onClose }) => {
 						</div>
 						<div style={{display: 'flex',flexDirection: 'row', justifyContent:'space-between'}}>
 							<AddToCartButton product={item.productInfo} />
-							<a>remove</a>
+							<a href="#" onClick={() => handleRemove(item.id)} style={{textDecoration: 'underline' }}>remove</a>
 						</div>
 					</div>
 				</div>

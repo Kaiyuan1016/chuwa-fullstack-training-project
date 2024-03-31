@@ -25,21 +25,32 @@ const cartSlice = createSlice({
             localStorage.setItem('cart', JSON.stringify(state.items));
         },
         decrementItemQuantity(state, action) {
-            const {id, quantityToRemove} = action.payload;
+            const {id, quantity, productInfo} = action.payload;
             const itemToRemoveIdx = state.items.findIndex(item => item.id === id);
 
             if(itemToRemoveIdx !== -1) {
                 const existingItem = state.items[itemToRemoveIdx];
-                if(existingItem.quantity > quantityToRemove) {
-                    existingItem.quantity -= quantityToRemove;
+                if(existingItem.quantity > quantity) {
+                    existingItem.quantity -= quantity;
+                    if(existingItem.quantity <= 0) {
+                        state.items.splice(itemToRemoveIdx, 1);
+                    }
                 } else {
                     state.items.splice(itemToRemoveIdx, 1);
                 }
+            }
+            localStorage.setItem('cart', JSON.stringify(state.items));
+        },
+        removeItemFromCart(state, action) {
+            const {id} = action.payload;
+            const itemToRemoveIdx = state.items.findIndex(item => item.id === id);
+            if(itemToRemoveIdx !== -1) {
+                state.items.splice(itemToRemoveIdx, 1);
             }
             localStorage.setItem('cart', JSON.stringify(state.items));
         }
     }
 });
 
-export const { addItemToCart, decrementItemQuantity } = cartSlice.actions;
+export const { addItemToCart, decrementItemQuantity, removeItemFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
