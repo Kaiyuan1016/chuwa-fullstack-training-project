@@ -2,8 +2,9 @@ import {
     createSlice,
     createAsyncThunk
 } from '@reduxjs/toolkit';
-import axios from 'axios';
- 
+import { fetchProducts, fetchProductById, createProduct, updateProduct } from '../../services/products';
+import { removeError, addError } from '../errorSlice';
+
 const initialState = {
     products:[],
     product:null,
@@ -12,49 +13,53 @@ const initialState = {
     status: 'idle'
 };
 
-export const fetchProducts = createAsyncThunk("products/fetchProducts", async ({sortBy='createTime', sortOrder='asc', page=1, pageSize=10}) => {
+export const fetchProductsAction = createAsyncThunk("products/fetchProducts", async (data) => {
     try {
-        const response = await axios.get('http://localhost:8080/products', {
-            params: {
-                sortBy,
-                sortOrder,
-                page,
-                pageSize
-            }
-        });
+       const products = await fetchProducts(data);
         // console.log('this is response ', response.data);
-        return response.data;
-    } catch(err) {
-        //TODO: error handler
-        console.error('Error fetching products', err);
+        // thunkAPI.dispatch(removeError());
+        return products;
+    } catch(error) {
+        const { message } = error;
+        console.log('Error fetching product data', message);
+        // thunkAPI.dispatch(addError(message));
+        // return thunkAPI.rejectWithValue(message);
     }
 })
 
-export const fetchProductById = createAsyncThunk("products/fetchProductById", async (productId) => {
+export const fetchProductByIdAction = createAsyncThunk("products/fetchProductById", async (data, thunkAPI) => {
     try {
-        const response = await axios.get(`http://localhost:8080/products/${productId}`);
-        return response.data;
-    } catch(err) {
-        //TODO: error handler
-        console.error('Error fetching products', err);
+        const product = await fetchProductById(data);
+        thunkAPI.dispatch(removeError());
+        return product;
+    } catch(error) {
+        const { message } = error;
+        thunkAPI.dispatch(addError(message));
+        return thunkAPI.rejectWithValue(message);
     }
 });
 
-export const updateProduct = createAsyncThunk("products/updateProduct", async ({productId, updatedData}) => {
+export const updateProductAction = createAsyncThunk("products/updateProduct", async (data, thunkAPI) => {
     try {
-        const response = await axios.put(`http://localhost:8080/products/${productId}`, updatedData);
-        return response.data;
-    } catch (err) {
-        console.error('Error updating product', err);
+        const product = await updateProduct(data);
+        thunkAPI.dispatch(removeError());
+        return product;
+    } catch(error) {
+        const { message } = error;
+        thunkAPI.dispatch(addError(message));
+        return thunkAPI.rejectWithValue(message);
     }
 });
 
-export const createProduct = createAsyncThunk("products/createProduct", async (product) => {
+export const createProductAction = createAsyncThunk("products/createProduct", async (data, thunkAPI) => {
     try {
-        const response = await axios.post(`http://localhost:8080/products/`, product);
-        return response.data;
-    } catch (err) {
-        console.error('Error updating product by ID', err);
+        const product = await createProduct(data);
+        thunkAPI.dispatch(removeError());
+        return product;
+    } catch(error) {
+        const { message } = error;
+        thunkAPI.dispatch(addError(message));
+        return thunkAPI.rejectWithValue(message);
     }
 });
 
@@ -64,47 +69,47 @@ const productsSlice = createSlice({
     reducers: {},
     extraReducers: builder => {
         builder
-        .addCase(fetchProducts.fulfilled, (state, action) => {
+        .addCase(fetchProductsAction.fulfilled, (state, action) => {
             state.products = action.payload;
             state.status = "succeeded";
         })
-        .addCase(fetchProducts.pending, (state) => {
+        .addCase(fetchProductsAction.pending, (state) => {
             state.status = "pending";
         })
-        .addCase(fetchProducts.rejected, (state, action) => {
+        .addCase(fetchProductsAction.rejected, (state, action) => {
             state.status = "failed";
             state.error = action.error.message;
         })
-        .addCase(fetchProductById.fulfilled, (state, action) => {
+        .addCase(fetchProductByIdAction.fulfilled, (state, action) => {
             state.product = action.payload;
             state.status = "succeeded";
         })
-        .addCase(fetchProductById.pending, (state) => {
+        .addCase(fetchProductByIdAction.pending, (state) => {
             state.status = "pending";
         })
-        .addCase(fetchProductById.rejected, (state, action) => {
+        .addCase(fetchProductByIdAction.rejected, (state, action) => {
             state.status = "failed";
             state.error = action.error.message;
         })
-        .addCase(updateProduct.fulfilled, (state, action) => {
+        .addCase(updateProductAction.fulfilled, (state, action) => {
             state.product = action.payload;
             state.status = "succeeded";
         })
-        .addCase(updateProduct.pending, (state) => {
+        .addCase(updateProductAction.pending, (state) => {
             state.status = "pending";
         })
-        .addCase(updateProduct.rejected, (state) => {
+        .addCase(updateProductAction.rejected, (state) => {
             state.status = "failed";
         })
-        .addCase(createProduct.fulfilled, (state, action) => {
+        .addCase(createProductAction.fulfilled, (state, action) => {
             state.product = action.payload;
             state.status = "succeeded";
 
         })
-        .addCase(createProduct.pending, (state) => {
+        .addCase(createProductAction.pending, (state) => {
             state.status = "pending";
         })
-        .addCase(createProduct.rejected, (state) => {
+        .addCase(createProductAction.rejected, (state) => {
             state.status = "failed";
         });
     }

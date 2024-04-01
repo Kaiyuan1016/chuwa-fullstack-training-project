@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProduct, createProduct, fetchProductById } from '../features/product/productsSlice';
+import { updateProductAction, createProductAction, fetchProductByIdAction } from '../features/product/productsSlice';
 
 const { TextArea } = Input;
 
@@ -41,7 +41,7 @@ const ProductForm = () => {
 
     useEffect(() => {
         if(isEditRoute) {
-            dispatch(fetchProductById(productId))
+            dispatch(fetchProductByIdAction(productId))
             .then(() => {
                 setIsLoading(false)}
             )
@@ -64,11 +64,11 @@ const ProductForm = () => {
         setImageUrl(updatedData.imageLink);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if(isEditRoute) {
-            dispatch(updateProduct({productId, updatedData}));
+            await dispatch(updateProductAction({productId, updatedData}));
         } else {
-            dispatch(createProduct(updatedData));
+            await dispatch(createProductAction(updatedData));
         }
         navigate(-1);
     };

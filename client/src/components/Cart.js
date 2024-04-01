@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import AddToCartButton from '../AddButton';
+import AddToCartButton from './AddButton';
 import { removeItemFromCart } from '../features/cart/cartSlice';
 
 const Cart = ({ visible, onClose }) => {

@@ -1,5 +1,5 @@
 const express = require('express'); 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const {
     getAllProducts,
     getProductById,
@@ -7,15 +7,16 @@ const {
     updateProduct,
     deleteProduct
 } = require('../controllers/product');
+const { loginRequired } = require('../middleware/auth');
 
-router.get('/products', getAllProducts);
+router.get('/', getAllProducts);
 
-router.get('/products/:id', getProductById);
+router.get('/:id', getProductById);
 
-router.post('/products', createProduct);
+router.post('/', loginRequired, createProduct);
 
-router.put('/products/:id', updateProduct);
+router.put('/:id', loginRequired, updateProduct);
 
-router.delete('/products/:id', deleteProduct);
+router.delete('/:id', loginRequired, deleteProduct);
 
 module.exports = router;

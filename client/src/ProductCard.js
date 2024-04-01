@@ -1,9 +1,11 @@
 import React from 'react';
 import './index.css';
-import AddButton from './AddButton';
+import AddButton from './components/AddButton';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const ProductCard = ({product}) => {
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
     const navigate = useNavigate();
     const handleClick = (id) => {
         return navigate(`/products/${id}`)
@@ -27,7 +29,9 @@ const ProductCard = ({product}) => {
                 </div>
                 <div className='button-list'>
                     <AddButton product={product} />
-                    <button className="btn edit-button button-base" onClick={() => handleEdit(product._id)}>Edit</button>
+                    {isAuthenticated ?
+                        <button className="btn edit-button button-base" onClick={() => handleEdit(product._id)}>Edit</button>
+                    : <></>}
                 </div>
             
         </div>
