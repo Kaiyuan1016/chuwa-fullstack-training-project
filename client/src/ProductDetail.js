@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { selectProductById, fetchProductById } from "./features/product/productsSlice";
+import { selectProductById, fetchProductByIdAction } from "./features/product/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductDetail = () => {
@@ -10,10 +10,11 @@ const ProductDetail = () => {
     const status = useSelector(state => state.products.status);
     const product = useSelector(state => state.products.product);
     const error = useSelector(state => state.products.error);
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(fetchProductById(productId))
+        dispatch(fetchProductByIdAction(productId))
         .then(() => setIsLoading(false))
         .catch(err => console.error('Error fetching product by id', err));
     }, [ dispatch, productId]);
@@ -51,7 +52,10 @@ const ProductDetail = () => {
                 <p>{product.description}</p>
                 <div className="detail-btn-list">
                     <button className="btn detail-button-base add-button">Add To Cart</button>
-                    <button className="btn detail-button-base edit-button" onClick={() => handleEdit(product._id)}>Edit</button>
+                    {isAuthenticated ?
+                        <button className="btn detail-button-base edit-button" onClick={() => handleEdit(product._id)}>Edit</button>
+                    : <></>}
+                    
                 </div>
             </div>
             </div>

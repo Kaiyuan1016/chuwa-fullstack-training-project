@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Button } from 'antd';
 
-import { addItemToCart, decrementItemQuantity } from './features/cart/cartSlice';
+import { addItemToCart, decrementItemQuantity } from '../features/cart/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const AddToCartButton = ({product}) => {
@@ -10,7 +10,7 @@ const AddToCartButton = ({product}) => {
     state.cart.items.find(item => item.id === product._id),
     (left, right) => left?.quantity === right?.quantity
   );
-  
+
   const[quantity, setQuantity] = useState(item ? item.quantity : 0);
 
   useEffect(() => {

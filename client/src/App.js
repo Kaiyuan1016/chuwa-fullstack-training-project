@@ -1,31 +1,32 @@
 import './App.css';
 import React from 'react';
 import 'antd/dist/reset.css'; 
+import { Routes, Route} from 'react-router-dom';
 
 import ProductDetail from './ProductDetail';
-
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import ProductsPage from './ProductsPage';
 import ProductForm from './components/ProductForm';
-import SignUp from './pages/Signup';
-import Login from './pages/Login';
-import UpdatePassword from './pages/UpdatePassword';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
+// import UpdatePassword from './pages/UpdatePassword';
+import AuthLayout from './components/Layout/AuthLayout';
+import NotFound from './pages/NotFound';
 
 export default function App () {
   return(
-    <BrowserRouter>
       <Routes>
         <Route path='/' element={<ProductsPage />} />
         <Route path='/products' element={<ProductsPage />} />
         <Route path='/products/:productId' element={<ProductDetail />} />
-        <Route path='/products/edit/:productId' element={<ProductForm />} />
-        <Route path='/products/edit/new' element={<ProductForm />} />
+        <Route element={<AuthLayout/>}>
+          <Route path='/products/edit/:productId' element={<ProductForm />} />
+          <Route path='/products/edit/new' element={<ProductForm />} />
+        </Route>
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/updatepassword' element={<UpdatePassword/>} />
-
+        <Route path='/signin' element={<SignIn />} />
+        {/* <Route path='/updatepassword' element={<UpdatePassword/>} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
   );
 }
 

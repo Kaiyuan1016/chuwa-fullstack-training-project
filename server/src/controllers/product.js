@@ -1,6 +1,6 @@
 const { Product } = require('../models/Product');
 
-getAllProducts = async (req, res) => {
+getAllProducts = async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;
     const pageSize = parseInt(req.query.pageSize) || 10;
     const sortBy = req.query.sortBy || 'createAt';
@@ -20,23 +20,23 @@ getAllProducts = async (req, res) => {
         res.json(
             products,
             // currentPage: page,
-            // totalPages: totalPages
+            // TODO: totalPages: totalPages
         );
     } catch(err) {
-        res.status(500).json({message: err.message});
+        return next(err);
     }
 }
 
-getProductById = async (req, res) => {
+getProductById = async (req, res, next) => {
     try {
         const product = await Product.findById(req.params?.id);
         res.status(200).json(product);
     } catch(err) {
-        res.status(500).json({message: err.message});
+        return next(err);
     }
 }
 
-createProduct = async (req, res) => {
+createProduct = async (req, res, next) => {
     try {
         const product = new Product(req.body);
         if(!product.name || !product.price || !product.stockQuantity) {
@@ -45,25 +45,25 @@ createProduct = async (req, res) => {
         await product.save();
         res.status(201).json(product);
     } catch(err) {
-        res.status(500).json({message: err.message});
+        return next(err);
     }
 }
 
-updateProduct = async(req, res) => {
+updateProduct = async(req, res, next) => {
     try {
         const product = await Product.findByIdAndUpdate(req.params?.id, req.body, {new: true});
         res.status(200).json(product);
     } catch(err) {
-        res.status(500).json({message: err.message});
+        return next(err);
     }
 }
 
-deleteProduct = async(req, res) => {
+deleteProduct = async(req, res, next) => {
     try {
         await Product.findByIdAndDelete(req.params?.id);
         res.status(200).json({message: 'Product deleted'});
     } catch(err) {
-        res.status(500).json({message: err.message});
+        return next(err);
     }
 }
 

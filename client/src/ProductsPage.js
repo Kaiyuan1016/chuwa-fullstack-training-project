@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ProductPagination from './Pagination';
 import ProductCard from './ProductCard';
-import { fetchProducts } from './features/product/productsSlice';
+import { fetchProductsAction } from './features/product/productsSlice';
 import { Select } from 'antd';
 
 function ProductsPage() {
@@ -11,6 +11,7 @@ function ProductsPage() {
     const products = useSelector(state => state.products.products);
     const status = useSelector(state => state.products.status);
     const error = useSelector(state => state.products.error);
+    const isAuthenticated = useSelector(state => state.user.isAuthenticated);
     const navigate = useNavigate();
     
     const pageSize = 10;
@@ -18,13 +19,22 @@ function ProductsPage() {
     useEffect(() => {
         if(status === 'idle') {
             // TODO: load cart for logged in user
-            dispatch(fetchProducts({page: localStorage.getItem('currentPage'), pageSize: pageSize, sortBy: localStorage.getItem('sortBy'), sortOrder: localStorage.getItem('sortOrder')}));
+            dispatch(fetchProductsAction({page: localStorage.getItem('currentPage'), pageSize: pageSize, sortBy: localStorage.getItem('sortBy'), sortOrder: localStorage.getItem('sortOrder')}));
         }
         
     }, [status, dispatch]);
     
+    useEffect(() => {
+        const fetchData = async () => {
+          await dispatch(fetchProductsAction({page: localStorage.getItem('currentPage'), pageSize: pageSize, sortBy: localStorage.getItem('sortBy'), sortOrder: localStorage.getItem('sortOrder')}));
+          // Any other data fetching logic
+        };
+      
+        fetchData();
+      }, [dispatch]); 
+
     const handlePageChange = useCallback((page) => {
-        dispatch(fetchProducts({page: page, pageSize: pageSize, sortBy: localStorage.getItem('sortBy'), sortOrder: localStorage.getItem('sortOrder')}));
+        dispatch(fetchProductsAction({page: page, pageSize: pageSize, sortBy: localStorage.getItem('sortBy'), sortOrder: localStorage.getItem('sortOrder')}));
     }, []);
 
     const handleAddProduct = () => {
@@ -53,7 +63,7 @@ function ProductsPage() {
         localStorage.setItem('sortBy', sortBy);
         localStorage.setItem('sortOrder', sortOrder);
         // console.log(localStorage);
-        dispatch(fetchProducts({sortBy, sortOrder, page: localStorage.getItem('currentPage'), pageSize: pageSize}));
+        dispatch(fetchProductsAction({sortBy, sortOrder, page: localStorage.getItem('currentPage'), pageSize: pageSize}));
     };
 
     if(status === 'pending') {
@@ -84,7 +94,7 @@ function ProductsPage() {
                     <Select.Option value="priceAsc">Price: low to high</Select.Option>
                     <Select.Option value="priceDesc">Price: high to low</Select.Option>
                 </Select>
-                <button className='btn add-button' onClick={handleAddProduct}>Add Product</button> {/* Add credential ternary judgement*/}
+                {isAuthenticated ? <button className='btn add-button' onClick={handleAddProduct}>Add Product</button>:<></>}
             </div>
         </div>
           <div className='product-list'>
