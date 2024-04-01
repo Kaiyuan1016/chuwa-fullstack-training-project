@@ -1,18 +1,18 @@
-/* PageHeader.css */
 .page-header {
-    height: 64px;
+    /*height: 64px;*/
     display: flex;
+    flex-wrap:wrap;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 0 20px;
     background-color: #111827;
     color: white;
 }
 
-.search-bar input {
-    width: 200px;
-    padding: 5px;
-    margin-right: 10px;
+.search-bar input, .user-info button{
+    width: auto;
+    min-width:150px;
+    margin:5px;
 }
 
 .search-bar button {
@@ -31,4 +31,109 @@
 
 .cart-total-price {
     margin-left: 10px;
+}
+
+
+.signin-btn, .signup-btn {
+    padding: 8px 8px;
+    margin: 0 5px;
+    font-size: 10px;
+    color: white;
+    background-color: #5048E5;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .signin-btn:hover {
+    background-color: #3932a0;
+  }
+  
+  
+  .signup-btn:hover {
+    background-color: #3932a0;
+  }
+
+/* Adjust the container of the Search component */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 528px;
+    padding: 0; /* Adjust padding if necessary */
+    margin: 0 auto; /* Center the search bar */
+}
+
+/* Specific styles for the Ant Design input and icons */
+.ant-input-search .ant-input-wrapper .ant-input-affix-wrapper .ant-input-suffix {
+    align-items: center; /* Vertical alignment of the search icon */
+    display: flex;
+}
+
+.ant-input-affix-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.ant-input-search .ant-input-wrapper .ant-input-affix-wrapper .ant-input {
+    padding: 4px 11px; /* Match padding to align text and icon */
+}
+
+
+/* Style for the Ant Design Search Input */
+.search-input .ant-input {
+    width: 100%; /* Ensures the input field occupies the entire width of its parent */
+    border: none; 
+    background-color: white; 
+}
+
+/* Style for the Ant Design Search Button */
+.search-input .ant-btn {
+    border: none; 
+    background-color: white;
+}
+
+  
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .search-bar {
+        order: 2; /* Ensure the search bar stays at the top */
+        width: 100%;
+        margin:10px 0;
+    }
+
+    .logo {
+        order: 1;
+        margin-bottom: 0.5rem; /* Remove margin-bottom if it's not needed */
+        text-align: center; /* Center the logo text */
+    }
+
+    .user-info {
+        order: 3; /* Positions the user info below the logo */
+        flex-direction: column;
+        align-items: center;
+        width:100%;
+        margin-bottom:0.5rem;
+    }
+
+    .user-logo {
+        margin-bottom: 10px; /* Add space between login/logout and sign-in/sign-up buttons */
+    }
+
+    .signin-btn, .signup-btn {
+        width: auto; /* Allows buttons to size according to their content */
+        margin: 0.5rem; /* Adds margin for spacing around buttons */
+    }
+
+    .cart-info {
+        order: 4;
+        width:100%; /* Positions the cart info at the bottom */
+    }
 }

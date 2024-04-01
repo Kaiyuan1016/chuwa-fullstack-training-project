@@ -33,6 +33,7 @@ const PageHeader = () => {
             <div style={{color: 'black', width: '528px', height: '48px', padding:'12px', border:'1px'}}>
                 <Search placeholder='Search' buttonstyle={{ backgroundColor: 'white', border:'white'}} />
             </div>
+
             <div className="user-info">
                 <div className="user-logo" style={{padding: '10px'}}>
                     {isAuthenticated ? (
@@ -40,12 +41,12 @@ const PageHeader = () => {
                     ) :
                     (
                         <div>
-                            <button onClick={() => handleNavigation('/signin')}>Sign In</button>
-                            <button onClick={() => handleNavigation('/signup')}>Sign Up</button>
+                            <button className="signin-btn" onClick={() => handleNavigation('/signin')}>Sign In</button>
+                            <button className="signup-btn" onClick={() => handleNavigation('/signup')}>Sign Up</button>
                         </div>
                     )}
                 </div>
-                <div className="cart-info">
+            <div className="cart-info">
                     <button
                         onClick={toggleCartVisibility}
                         style={{

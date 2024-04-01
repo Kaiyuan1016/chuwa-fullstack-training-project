@@ -6,10 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import store from './features/store';
 import { Provider } from 'react-redux';
 import PageHeader from './components/Navbar/PageHeader';
-
 import {jwtDecode} from 'jwt-decode';
 import { setCurrentUser } from './features/userSlice';
-
 import { BrowserRouter} from 'react-router-dom';
 
 if (localStorage.getItem('token')) {
@@ -21,7 +19,7 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <PageHeader />
-      <div style={{ backgroundColor: '#F1F1F1', padding:'50px' }}>
+      <div style={{ backgroundColor: '#F1F1F1', padding:'1rem',maxWidth:'1200px',margin:'0 auto' }}>
         <App />
       </div>
     </Provider>
