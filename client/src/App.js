@@ -3,7 +3,7 @@ import React from 'react';
 import 'antd/dist/reset.css'; 
 import { Routes, Route} from 'react-router-dom';
 
-import ProductDetail from './ProductDetail';
+import ProductDetail from './pages/ProductDetailPage/ProductDetail';
 import ProductsPage from './ProductsPage';
 import ProductForm from './components/ProductForm';
 import SignUp from './pages/SignUp';
