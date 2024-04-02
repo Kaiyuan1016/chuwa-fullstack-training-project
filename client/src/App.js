@@ -8,9 +8,11 @@ import ProductsPage from './ProductsPage';
 import ProductForm from './components/ProductForm';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
-// import UpdatePassword from './pages/UpdatePassword';
+import ForgotPassword from './pages/forgotPassword';
+import ResetPassword from './pages/resetPassword';
 import AuthLayout from './components/Layout/AuthLayout';
 import NotFound from './pages/NotFound';
+import SuccessPage from './pages/successPage';
 
 export default function App () {
   return(
@@ -24,7 +26,10 @@ export default function App () {
         </Route>
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
-        {/* <Route path='/updatepassword' element={<UpdatePassword/>} /> */}
+        <Route path='/forgotpassword' element={<ForgotPassword />} />
+        <Route path='/forgotpassword/success' element={<SuccessPage />} />
+        <Route path='/resetpassword' element={<ResetPassword />} />
+        <Route path='/resetpassword/success' element={<SuccessPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
   );

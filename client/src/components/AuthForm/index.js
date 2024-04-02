@@ -18,6 +18,8 @@ export default function AuthForm({
       <Typography className={styles.title}>{title}</Typography>
       <Form onFinish={onSubmit} autoComplete="off">
         {fields.map(field => (
+          <React.Fragment key={field.name}>
+          {field.description? <Typography>{field.description}</Typography> : <></>}
           <Form.Item key={field.name} name={field.name} rules={field.rules}>
             {field.type === 'password' ? (
               <Input.Password
@@ -33,6 +35,7 @@ export default function AuthForm({
               />
             )}
           </Form.Item>
+          </React.Fragment>
         ))}
         <Form.Item>
           <Button
