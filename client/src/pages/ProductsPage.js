@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import ProductPagination from './Pagination';
-import ProductCard from './ProductCard';
-import { fetchProductsAction } from './features/product/productsSlice';
+import ProductPagination from '../Pagination';
+import ProductCard from '../ProductCard';
+import { fetchProductsAction } from '../features/product/productsSlice';
 import { Select } from 'antd';
 
 function ProductsPage() {
