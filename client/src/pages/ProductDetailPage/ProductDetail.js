@@ -34,7 +34,7 @@ const ProductDetail = () => {
     
     return(
         <div className="product-detail-wrapper">
-            <h2 className="product-title">Product Detail</h2>
+            <h4 className="product-title">Product Detail</h4>
             <div className="product-detail-container">
                 <img className="detail-img" src={product.imageLink} alt="Product" />
                 <div className="detail-info">
