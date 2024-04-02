@@ -22,7 +22,7 @@ export const fetchCart = (userId) => async (dispatch) => {
 };
 
 export const updateCartInDatabase = createAsyncThunk(
-    'currentUser/updateCartInDatabase',
+    'cart/updateCartInDatabase',
     async (_, { getState, dispatch}) => {
       const state = getState();
       const cartItems = state.cart.items.map((item) => ({
@@ -56,15 +56,6 @@ const cartSlice = createSlice({
             }
             localStorage.setItem('cart', JSON.stringify(state.items));
         },
-        // prepare(payload) {
-        //     return {
-        //       payload,
-        //       meta: {
-        //         thunk: 'updateCartInDatabase'
-        //       }
-        //     }
-        //   }
-        // },
         decrementItemQuantity(state, action) {
             const {id, quantity, productInfo} = action.payload;
             const itemToRemoveIdx = state.items.findIndex(item => item.id === id);
