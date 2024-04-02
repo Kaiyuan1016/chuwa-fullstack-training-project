@@ -27,12 +27,14 @@ export default function ForgotPassword() {
   };
   return (
     <div style={{
-      height: 'calc(100vh - 64px - 69px)',
-      padding: '0 50px',
-      width: '440px',
-      margin: '0 auto',
-      overflowY: 'auto'
-    }}>
+        height: '528px',
+        padding: '50px',
+        width: '600px',
+        margin: '0 auto',
+        overflowY: 'auto',
+        border:'1px solid #ccc',
+        backgroundColor: 'white'
+      }}>
       <AuthForm
         buttonText="Update password"
         onSubmit={onSubmit}

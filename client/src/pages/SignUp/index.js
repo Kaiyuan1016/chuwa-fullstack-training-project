@@ -40,17 +40,20 @@ export default function SignUp() {
   };
   return (
     <div style={{
-      height: 'calc(100vh - 64px - 69px)',
-      padding: '0 50px',
-      width: '440px',
+      height: '60vh',
+      padding: '5vh',
+      maxWidth: '600px',
       margin: '0 auto',
-      overflowY: 'auto'
+      overflowY: 'auto',
+      border:'1px solid #ccc',
+      backgroundColor: 'white',
     }}>
       <AuthForm
         buttonText="Create account"
         onSubmit={onSubmit}
         title="Sign up an account"
         fields={fields}
+        style={{ backgroundColor:'#5048E5'}}
       />
     </div>
   );

@@ -44,6 +44,7 @@ export default function AuthForm({
             className={styles.btn}
             size="large"
             loading={status === 'pending'}
+            style={{ backgroundColor:'#5048E5'}}
           >
             {buttonText}
           </Button>

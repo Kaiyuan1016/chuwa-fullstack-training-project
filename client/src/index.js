@@ -21,7 +21,7 @@ root.render(
   <BrowserRouter>
     <Provider store={store}>
       <PageHeader />
-      <div style={{ backgroundColor: '#F1F1F1', padding:'50px' }}>
+      <div style={{ padding:'50px' }}>
         <App />
       </div>
     </Provider>

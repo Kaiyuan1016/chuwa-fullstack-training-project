@@ -29,20 +29,17 @@ const PageHeader = () => {
 
     return (
         <header className="page-header">
-            <div className="logo"><span style={{fontWeight: '700', fontSize: '28px'}}>Management</span> <span style={{fontSize: '12px'}}>chuwa</span></div>
+            <div className="logo">{window.innerWidth <= 768 ?( <span>M</span>):(<span style={{fontWeight: '700', fontSize: '28px' }}>Management</span>)} <span style={{fontSize: '12px'}}>chuwa</span></div>
             <div style={{color: 'black', width: '528px', height: '48px', padding:'12px', border:'1px'}}>
                 <Search placeholder='Search' buttonstyle={{ backgroundColor: 'white', border:'white'}} />
             </div>
             <div className="user-info">
                 <div className="user-logo" style={{padding: '10px'}}>
                     {isAuthenticated ? (
-                        <button onClick={() => dispatch(logOutUser())}>Log Out</button>
+                        <p onClick={() => dispatch(logOutUser())}>Log Out</p>
                     ) :
                     (
-                        <div>
-                            <button onClick={() => handleNavigation('/signin')}>Sign In</button>
-                            <button onClick={() => handleNavigation('/signup')}>Sign Up</button>
-                        </div>
+                        <p onClick={() => handleNavigation('/signin')}>Sign In</p>
                     )}
                 </div>
                 <div className="cart-info">

@@ -85,7 +85,7 @@ function ProductsPage() {
         }
     }
     return (
-      <div style={{ position: 'relative', width:'1323px', display: 'flex', flexDirection: 'column', marginLeft: 'auto', marginRight: 'auto' }}>
+      <div style={{ position: 'relative',width:'90vw', maxWidth:'1323px', display: 'flex', flexDirection: 'column', marginLeft: 'auto', marginRight: 'auto' }}>
         <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'20px'}}>
             <h4>Products</h4>
             <div>

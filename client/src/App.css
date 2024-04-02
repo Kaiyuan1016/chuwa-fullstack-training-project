@@ -2,9 +2,13 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
 /* index.css */
+body{
+  background-color: #F1F1F1;
+}
 .product-list {
-  width:1323px;
-  height: 682px;
+  width: 90vw;
+  max-width:1323px;
+  height: auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -75,26 +79,6 @@
   border: none !important;
   border-radius: 0 !important;
 }
-
-@media (max-width: 768px) {
-  .product-list {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-  .product-detail-container {
-    grid-template-columns: 1fr; /* Change to single column for smaller screens */
-    grid-template-areas:
-      "h2"
-      "detail-img"
-      "detail-info";
-  }
-  .detail-img {
-    width: 308px;
-    height: 276px;
-  }
-}
-
 .h2 {
   grid-area: h2;
 }
@@ -106,32 +90,55 @@
 
 .product-detail-container {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* First column auto-sized, second column takes the remaining space */
-  grid-template-areas:
-    "detail-img detail-info"; 
-  padding:20px;
-  width: 1323px;
-  position: relative;
+  grid-template-areas: 'detail-img' 'detail-info';
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 90vw;
+  max-width: 1323px;
+  height: auto;
+  background-color: white;
+  padding: 20px;
+}
+
+.detail-img {
+  grid-area: detail-img;
+  width: 80vw;
+  max-width: 662px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.detail-info {
+  grid-area: detail-info;
+  margin: 0 20px;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 768px) {
+  .product-list {
+    grid-template-columns: 1fr; 
+  }
+
+  .product-detail-container {
+    grid-template-areas: 'detail-img detail-info';
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .detail-img {
+    width: 40vw;
+    height: 80vh;
+    max-height: 597px;
+  }
+
+  .detail-info {
+    margin-left: 20px;
+  }
 }
 
 .detail-button-base {
   width: 133px;
   height: 40px;
-}
-
-.detail-img {
-  grid-area: detail-img; 
-  width: 662px;
-  height: 597px;
-  margin-top: auto;
-  margin-bottom: auto;
-  object-fit: contain;
-}
-.detail-info {
-  grid-area: detail-info;
-  margin-top: 20px;
-  margin-bottom: auto;
-  margin-left: 20px;
 }
 .detail-btn-list {
   display: flex;

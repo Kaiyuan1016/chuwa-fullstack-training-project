@@ -47,12 +47,14 @@ export default function ResetPassword() {
 
   return (
     <div style={{
-      height: 'calc(100vh - 64px - 69px)',
-      padding: '0 50px',
-      width: '440px',
-      margin: '0 auto',
-      overflowY: 'auto'
-    }}>
+        height: '60vh',
+        padding: '5vh',
+        maxWidth: '600px',
+        margin: '0 auto',
+        overflowY: 'auto',
+        border:'1px solid #ccc',
+        backgroundColor: 'white',
+      }}>
       <AuthForm
         buttonText="Reset Password"
         onSubmit={onSubmit}

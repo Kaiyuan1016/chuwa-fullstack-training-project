@@ -32,25 +32,28 @@ export default function SignIn() {
 
   return (
     <div style={{
-      height: 'calc(100vh - 64px - 69px)',
-      padding: '0 50px',
-      width: '440px',
+      height: '60vh',
+      padding: '5vh',
+      maxWidth: '600px',
       margin: '0 auto',
-      overflowY: 'auto'
+      overflowY: 'auto',
+      border:'1px solid #ccc',
+      backgroundColor: 'white',
     }}>
       <AuthForm
         buttonText="Sign In"
         onSubmit={onSubmit}
         title="Sign in to your account"
         fields={fields}
+        
       />
-      <p>
+      <p style={{display: 'flex', justifyContent:'space-between'}}>
         <span>
           Don't have an account? <Link to="/signup">Sign up</Link>
         </span>
-        <span>
+        <a href='/forgotpassword'>
           Forgot password?
-        </span>
+        </a>
       </p>
     </div>
   );
