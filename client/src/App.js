@@ -19,8 +19,8 @@ export default function App () {
         <Route path='/products' element={<ProductsPage />} />
         <Route path='/products/:productId' element={<ProductDetail />} />
         <Route element={<AuthLayout/>}>
-          <Route path='/products/edit/:productId' element={<ProductForm />} />
-          <Route path='/products/edit/new' element={<ProductForm />} />
+        <Route path='/products/edit/:productId' element={<ProductForm />} />
+        <Route path='/products/edit/new' element={<ProductForm />} />
         </Route>
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
