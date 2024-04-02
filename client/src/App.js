@@ -4,7 +4,7 @@ import 'antd/dist/reset.css';
 import { Routes, Route} from 'react-router-dom';
 
 import ProductDetail from './pages/ProductDetailPage/ProductDetail';
-import ProductsPage from './pages/ProductsPage';
+import ProductsPage from './ProductsPage';
 import ProductForm from './components/ProductForm';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
