@@ -60,7 +60,7 @@ body {
 }
 
 .card-info {
-  /* Additional styling if necessary */
+  margin-bottom:0px;
 }
 
 .card-actions {
@@ -70,7 +70,7 @@ body {
   width:100%;
 }
 
-.button-base, .add-button, .edit-button {
+.button-base, .edit-button {
   width: 100%; 
   margin-top: 0px; 
 }
@@ -93,6 +93,7 @@ body {
 .add-button {
   background-color: #5048E5;
   color: white;
+  width: 100%; 
 }
 
 .edit-button, .out-of-stock-btn {
