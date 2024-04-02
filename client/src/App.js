@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import 'antd/dist/reset.css'; 
-import { Routes, Route} from 'react-router-dom';
+//import { Routes, Route} from 'react-router-dom';
 
 import ProductDetail from './pages/ProductDetailPage/ProductDetail';
 import ProductsPage from './ProductsPage';
@@ -13,7 +13,7 @@ import AuthLayout from './components/Layout/AuthLayout';
 import NotFound from './pages/NotFound';
 
 import UpdatePassword from './pages/UpdatePassword';
-//import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ResetPassword from './pages/ResetPassword';
 
 export default function App () {
