@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Product = require('../models/Product');
 
 exports.signin = async function (req, res, next) {
   try {
@@ -7,6 +8,7 @@ exports.signin = async function (req, res, next) {
     const user = await User.findOne({
       email: req.body.email
     });
+
     const { id, cart } = user;
 
     // checking if their password matches what was sent to the server
@@ -14,16 +16,24 @@ exports.signin = async function (req, res, next) {
 
     // if it all matches, log them in
     if (isMatch) {
+      // Fetch product info for each item in cart
+      const cartWithDetails = await Promise.all(cart.map(async (item) => {
+        const product = await Product.findById(item.productId);
+        return {
+          ...item.toObject(),
+          productInfo: product
+        };
+      }));
       let token = jwt.sign(
         {
           id,
-          cart
+          cart: cartWithDetails
         },
         process.env.JWT_SECRET_KEY
       );
       return res.status(200).json({
         id,
-        cart,
+        cart: cartWithDetails,
         token
       });
     } else {
@@ -35,7 +45,7 @@ exports.signin = async function (req, res, next) {
   } catch (err) {
     return next({
       status: 400,
-      message: 'Invalid Email / Password.'
+      message: `Invalid Email / Password.${err}`
     });
   }
 };

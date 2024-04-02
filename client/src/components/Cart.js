@@ -3,6 +3,7 @@ import { Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import AddToCartButton from './AddButton';
 import { removeItemFromCart } from '../features/cart/cartSlice';
+import { updateCartInDatabase } from "../features/userSlice";
 
 const Cart = ({ visible, onClose }) => {
 
@@ -12,12 +13,13 @@ const Cart = ({ visible, onClose }) => {
     const dispatch = useDispatch();
   
 	const handleRemove = (productId) => {
-		dispatch(removeItemFromCart({id: productId}));
+		dispatch(removeItemFromCart({id: productId}))
+		dispatch(updateCartInDatabase({"cart": cart}));
 	};
 
 	return (
     <Modal
-	visible={visible}
+	open={visible}
 	onCancel={onClose}
 	footer={null}
 	centered={false}
@@ -29,10 +31,10 @@ const Cart = ({ visible, onClose }) => {
 		<header style={{backgroundColor: '#5048E5'}}>
 			<h4 style={{fontSize:'32px', display:'flex', left:0,}}>Cart({itemCount})</h4>
 		</header>
-        <div>
+        <div style={{overflow: 'auto'}}>
 			{cart?.map((item) => (
 				<div key={item.id} style={{display: 'flex', flexDirection: 'row', width: '460px', height:'120px', gap:'10px', marginBottom: '10px'}}>
-					<img src={item.productInfo.imageLink} />
+					<img style={{width:'112px', height:'120px'}} src={item.productInfo.imageLink} />
 					<div style={{display: 'flex', flexDirection:'column', justifyContent:'space-between'}}>
 						<div style={{display: 'flex',flexDirection: 'row', justifyContent:'space-between'}}>
 							<div>{item.productInfo.name}</div>

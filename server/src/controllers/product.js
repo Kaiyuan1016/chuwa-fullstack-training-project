@@ -1,4 +1,4 @@
-const { Product } = require('../models/Product');
+const Product  = require('../models/Product');
 
 getAllProducts = async (req, res, next) => {
     const page = parseInt(req.query.page) || 1;

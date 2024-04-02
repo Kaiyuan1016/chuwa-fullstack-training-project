@@ -5,6 +5,8 @@ const cors = require('cors');
 const errorHandler = require('./controllers/error');
 const productRoutes = require('./routers/product');
 const authRoutes = require('./routers/auth');
+const userRoutes = require('./routers/user');
+
 const connectDB = require('./db/index');
 const bodyParser = require('body-parser');
 
@@ -19,6 +21,7 @@ connectDB();
 
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/user', userRoutes);
 
 app.use((req, res, next) => {
   const err = new Error('Not Found');

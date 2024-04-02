@@ -1,11 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Button } from 'antd';
-
+import { updateCartInDatabase } from "../features/userSlice";
 import { addItemToCart, decrementItemQuantity } from '../features/cart/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const AddToCartButton = ({product}) => {
   const dispatch = useDispatch();
+  const items = useSelector(state => state.cart.items);
   const item = useSelector(state => 
     state.cart.items.find(item => item.id === product._id),
     (left, right) => left?.quantity === right?.quantity
@@ -23,13 +24,16 @@ const AddToCartButton = ({product}) => {
   
   const handleAdd = useCallback(() => {
     dispatch(addItemToCart({id: product._id, quantity: 1, productInfo: product}));
-  }, [dispatch, product]);
+    dispatch(updateCartInDatabase({"cart": items}));
+
+  }, [dispatch, product, items]);
 
   const handleDecrement = useCallback(() => {
     if(quantity > 0) {
       dispatch(decrementItemQuantity({id: product._id, quantity: 1, productInfo: product}));
+      dispatch(updateCartInDatabase({"cart": items}));
     }
-  },[dispatch, product, quantity]);
+  },[dispatch, product, quantity, items]);
 
   return (
     <div>

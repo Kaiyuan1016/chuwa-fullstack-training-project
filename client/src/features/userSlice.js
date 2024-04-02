@@ -1,10 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { signIn, signUp } from '../services/auth';
 import { addError, removeError } from './errorSlice';
+import { updateCart } from '../services/user';
+import { initializeCart } from './cart/cartSlice';
 
 export const initialState = {
   isAuthenticated: false,
   user: {},
+  cart: [],
   status: 'idle'
 };
 
@@ -14,6 +17,13 @@ export const authUser = createAsyncThunk(
     try {
       const user = await signIn(data);
       localStorage.setItem('token', user.token);
+      const initialCart = user.cart.map((item) => ({
+        id: item.productId,
+        quantity: item.quantity,
+        productInfo: item.productInfo,
+      }));
+      localStorage.setItem('cart', initialCart);
+      thunkAPI.dispatch(initializeCart(initialCart));
       thunkAPI.dispatch(removeError());
       return user;
     } catch (error) {
@@ -35,6 +45,20 @@ export const signUpUser = createAsyncThunk(
       const { message } = error;
       thunkAPI.dispatch(addError(message));
       return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const updateCartInDatabase = createAsyncThunk(
+  'currentUser/updateCartInDatabase',
+  async (cartItems, { getState, dispatch}) => {
+    const state = getState();
+    const userId = state.user.id;
+    try {
+      const response = await updateCart(userId, cartItems);
+      return response.data;
+    } catch(err) {
+      throw err;
     }
   }
 );
