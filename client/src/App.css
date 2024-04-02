@@ -23,10 +23,9 @@ body {
   gap: 20px;
 }
 
-/* index.css */
 .product-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(5, minmax(240px, 1fr));
   gap: 20px;
   padding: 20px;
   justify-content: center;
@@ -52,8 +51,8 @@ body {
 .card-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* This will push the .card-actions to the bottom */
-  height: 100%; /* Ensure the card body takes up all available space */
+  justify-content: space-between; 
+  height: 100%; 
 }
 
 .card-info {
@@ -61,13 +60,13 @@ body {
 }
 
 .card-actions {
-  margin-top: auto; /* This will push the actions to the bottom */
+  margin-top: auto;
   width: 100%;
 }
 
 .button-base, .add-button, .edit-button {
-  width: 100%; /* Full width buttons */
-  margin-top: 10px; /* Space above the button */
+  width: 100%; 
+  margin-top: 10px; 
 }
 
 .info-container, .button-list, .detail-btn-list {
@@ -132,16 +131,54 @@ body {
   align-items: center;
 }
 
-/* Adjusting Select width */
 .ant-select {
   width: 179px;
   margin-right: 20px;
 }
 
+@media (max-width: 1200px) {
+  .product-list {
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+  }
+  .card {
+    margin-bottom: 10px; /* Less space between cards on smaller screens */
+  }
+
+  /* Product actions stacking */
+  .products-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ant-select {
+    width: 100%; 
+    margin-bottom: 10px; 
+  }
+}
+
+@media (max-width: 1000px) {
+  .product-list {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+  }
+  .card {
+    margin-bottom: 10px; /* Less space between cards on smaller screens */
+  }
+
+  /* Product actions stacking */
+  .products-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ant-select {
+    width: 100%; 
+    margin-bottom: 10px; 
+  }
+}
 
 @media (max-width: 800px) {
   .product-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
   }
   .card {
     margin-bottom: 10px; /* Less space between cards on smaller screens */
@@ -160,6 +197,10 @@ body {
 }
 
 @media (max-width: 576px) {
+  .product-list {
+    grid-template-columns: repeat(1, minmax(240px, 1fr));
+  }
+
   .products-container {
     padding: 0 10px; 
   }
