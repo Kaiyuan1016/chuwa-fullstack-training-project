@@ -97,7 +97,6 @@ exports.requestPasswordReset = async function(req, res, next) {
         await user.save();
 
         // Construct reset URL
-        // Adjust to your frontend's password reset page URL
         const resetUrl = `http://localhost:3000/password-reset/${resetToken}`;
 
         // Email setup

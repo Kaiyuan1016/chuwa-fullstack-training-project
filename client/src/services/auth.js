@@ -26,7 +26,8 @@ export const sendPasswordResetEmail = async (email) => {
 };
 
 export const resetPassword = async ({ token, newPassword }) => {
-  const response = await fetch('/api/auth/resetPassword', {
+  const url = `http://localhost:8080/api/auth/resetPassword`;
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +35,8 @@ export const resetPassword = async ({ token, newPassword }) => {
     body: JSON.stringify({ token, newPassword }),
   });
   if (!response.ok) {
-    throw new Error('Failed to reset password');
+    const errorBody = await response.json();
+    throw new Error(errorBody.message || 'Failed to reset password');
   }
   return await response.json();
 };
