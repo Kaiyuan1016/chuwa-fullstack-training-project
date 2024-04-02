@@ -1,0 +1,133 @@
+.product-detail-wrapper {
+    max-width: 1323px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    min-height: calc(100vh - 85px - 64px);
+}
+
+.product-detail-container {
+    height:684;
+    width:1323;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+}
+
+.detail-img {
+    flex: 1 1 60%;
+    max-width: 600px; /* Adjust as needed */
+    height: auto;
+    object-fit: cover;
+}
+
+.detail-info {
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    flex: 1 1 auto;
+    padding: 20px;
+}
+
+.product-name, .product-category, .product-description {
+    color: #535353;
+}
+
+.product-title {
+    color: #111827;
+    font-size: 24px; /* Adjust to fit 1193x44 */
+}
+
+.product-category {
+    font-size: 14px; /* Adjust to fit 84x22 */
+    margin-bottom:1px;
+}
+
+.product-name {
+    font-size: 25px; /* Adjust to fit 389x44 */
+    margin-top:1px;
+}
+
+.add-button, .edit-button {
+    width: 133px; /* Set width to match requested size */
+    height: 40px; /* Set height to match requested size */
+    font-size: 16px; 
+    margin-top:80px;
+}
+
+.price-container {
+    display: flex;
+    align-items: center;
+}
+
+.product-description {
+    font-size: 14px; /* Adjust to fit text within 428x88 */
+    width: 428px; /* Set width to match requested size */
+    height: 88px; /* Set height to match requested size */
+    word-wrap:break-word;
+}
+
+.product-price {
+    margin-right: 10px;
+    font-size:22px;
+}
+
+.out-of-stock-btn {
+    
+}
+
+.detail-btn-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top:auto;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .product-detail-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detail-img {
+        width: 100%;
+    }
+
+    .detail-info {
+        width: 100%;
+        padding:20px;
+    }
+    .product-title {
+        color: #111827;
+        font-size: 24px;
+        text-align: center;
+        width: 100%; 
+    }
+    .product-category {
+        font-size: 14px; 
+    }
+    .product-name {
+        font-size: 20px; 
+    }
+    .product-price {
+        font-size: 20px; 
+        color: #111827;
+    }
+    .product-description {
+        width:auto;
+        max-width: 100%;
+        height: auto;
+        font-size: 13px; 
+        padding:10px;
+        margin-bottom: 20px;
+    }
+    .add-button, .edit-button {
+        width:133px;
+        height:40px;
+        margin-top: 80px;
+    }
+    .detail-btn-list {
+        margin-top: 20px;
+    }
+}

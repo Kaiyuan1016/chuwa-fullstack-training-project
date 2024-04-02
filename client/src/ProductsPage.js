@@ -5,6 +5,8 @@ import ProductPagination from './Pagination';
 import ProductCard from './ProductCard';
 import { fetchProductsAction } from './features/product/productsSlice';
 import { Select } from 'antd';
+import './App.css';
+
 
 function ProductsPage() {
     const dispatch = useDispatch();
@@ -85,29 +87,30 @@ function ProductsPage() {
         }
     }
     return (
-      <div style={{ position: 'relative', width:'1323px', display: 'flex', flexDirection: 'column', marginLeft: 'auto', marginRight: 'auto' }}>
-        <div style={{ display:'flex', flexDirection:'row', justifyContent:'space-between', marginBottom:'20px'}}>
+        <div className="products-container">
+          <div className="products-header">
             <h4>Products</h4>
-            <div>
-                <Select style={{width: '179px', height:'40px', marginRight:'20px'}} defaultValue='Sort' onChange={sortProducts} value={currentSort}>
-                    <Select.Option value="createTimeAsc">Last added</Select.Option>
-                    <Select.Option value="priceAsc">Price: low to high</Select.Option>
-                    <Select.Option value="priceDesc">Price: high to low</Select.Option>
-                </Select>
-                {isAuthenticated ? <button className='btn add-button' onClick={handleAddProduct}>Add Product</button>:<></>}
+            <div className="products-actions">
+              <Select defaultValue='Sort' onChange={sortProducts} value={currentSort}>
+                <Select.Option value="createTimeAsc">Last added</Select.Option>
+                <Select.Option value="priceAsc">Price: low to high</Select.Option>
+                <Select.Option value="priceDesc">Price: high to low</Select.Option>
+              </Select>
+              {isAuthenticated && (
+                <button className='btn add-button' onClick={handleAddProduct}>Add Product</button>
+              )}
             </div>
-        </div>
+          </div>
           <div className='product-list'>
-          {products.map((product) =>
-            <ProductCard key={product._id} product={product}/>
-          )}
-        </div>
-        
-        <div style={{ alignSelf: 'flex-end', padding:'20px' }}>
+            {products.map((product) =>
+              <ProductCard key={product._id} product={product}/>
+            )}
+          </div>
+          <div className="pagination-container">
             <ProductPagination onPageChange={handlePageChange}/>
+          </div>
         </div>
-      </div>
-    );
+      );
 }
 
 export default ProductsPage;

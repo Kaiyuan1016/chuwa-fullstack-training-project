@@ -29,32 +29,28 @@ const PageHeader = () => {
 
     return (
         <header className="page-header">
-            <div className="logo"><span style={{fontWeight: '700', fontSize: '28px'}}>Management</span> <span style={{fontSize: '12px'}}>chuwa</span></div>
-            <div style={{color: 'black', width: '528px', height: '48px', padding:'12px', border:'1px'}}>
-                <Search placeholder='Search' buttonstyle={{ backgroundColor: 'white', border:'white'}} />
+            <div className="logo">
+                <span style={{ fontWeight: '700', fontSize: '28px' }}>Management</span>
+                <span style={{ fontSize: '12px' }}>chuwa</span>
+            </div>
+            <div className="search-bar">
+                <Search placeholder="Search" />
             </div>
             <div className="user-info">
-                <div className="user-logo" style={{padding: '10px'}}>
+                <div className="user-logo" style={{ padding: '10px' }}>
                     {isAuthenticated ? (
                         <button onClick={() => dispatch(logOutUser())}>Log Out</button>
-                    ) :
-                    (
+                    ) : (
                         <div>
-                            <button onClick={() => handleNavigation('/signin')}>Sign In</button>
-                            <button onClick={() => handleNavigation('/signup')}>Sign Up</button>
+                            <button className="signin-btn" onClick={() => handleNavigation('/signin')}>Sign In</button>
+                            <button className="signup-btn" onClick={() => handleNavigation('/signup')}>Sign Up</button>
                         </div>
                     )}
                 </div>
                 <div className="cart-info">
-                    <button
-                        onClick={toggleCartVisibility}
-                        style={{
-                            backgroundColor: 'transparent',
-                            border: 'none',
-                            padding: 0}}
-                    >
+                    <button onClick={toggleCartVisibility} style={{ backgroundColor: 'transparent', border: 'none', padding: 0 }}>
                         <Badge color="secondary" badgeContent={itemCount}>
-                            <ShoppingCartIcon />{" "}
+                            <ShoppingCartIcon />
                         </Badge>
                     </button>
                     <div className="cart-total-price">${totalPrice}</div>

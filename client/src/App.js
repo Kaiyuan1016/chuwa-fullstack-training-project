@@ -3,7 +3,7 @@ import React from 'react';
 import 'antd/dist/reset.css'; 
 import { Routes, Route} from 'react-router-dom';
 
-import ProductDetail from './ProductDetail';
+import ProductDetail from './pages/ProductDetailPage/ProductDetail';
 import ProductsPage from './ProductsPage';
 import ProductForm from './components/ProductForm';
 import SignUp from './pages/SignUp';
@@ -19,8 +19,8 @@ export default function App () {
         <Route path='/products' element={<ProductsPage />} />
         <Route path='/products/:productId' element={<ProductDetail />} />
         <Route element={<AuthLayout/>}>
-          <Route path='/products/edit/:productId' element={<ProductForm />} />
-          <Route path='/products/edit/new' element={<ProductForm />} />
+        <Route path='/products/edit/:productId' element={<ProductForm />} />
+        <Route path='/products/edit/new' element={<ProductForm />} />
         </Route>
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
