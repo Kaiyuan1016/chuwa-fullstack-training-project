@@ -35,24 +35,28 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* This will push the button to the bottom */
-  padding: 10px;
+  padding: 5px;
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   background-color: white;
   margin-bottom: 20px; /* Add space between cards */
+  width:242px;
+  height:303px;
+  overflow: hidden;
 }
 
 .card-img-top {
+  max-height:120px;
   width: 100%;
-  height: auto;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between; 
-  height: 100%; 
+  flex:1;
+  padding:0px 10px;
 }
 
 .card-info {
@@ -60,20 +64,22 @@ body {
 }
 
 .card-actions {
+  display:auto;
+  justify-content: center;
   margin-top: auto;
-  width: 100%;
+  width:100%;
 }
 
 .button-base, .add-button, .edit-button {
   width: 100%; 
-  margin-top: 10px; 
+  margin-top: 0px; 
 }
 
 .info-container, .button-list, .detail-btn-list {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .button-base {
@@ -81,7 +87,7 @@ body {
   width: 100%;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .add-button {
