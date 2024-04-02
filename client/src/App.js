@@ -11,6 +11,7 @@ import SignIn from './pages/SignIn';
 // import UpdatePassword from './pages/UpdatePassword';
 import AuthLayout from './components/Layout/AuthLayout';
 import NotFound from './pages/NotFound';
+import UpdatePassword from './pages/UpdatePassword';
 
 export default function App () {
   return(
@@ -25,7 +26,9 @@ export default function App () {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/signin' element={<SignIn />} />
         {/* <Route path='/updatepassword' element={<UpdatePassword/>} /> */}
+        <Route path='/updatepassword' element={<UpdatePassword />} />
         <Route path="*" element={<NotFound />} />
+
       </Routes>
   );
 }

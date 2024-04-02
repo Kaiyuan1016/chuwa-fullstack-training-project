@@ -15,3 +15,13 @@ export const signIn = async data => {
     data
   });
 };
+
+export const sendPasswordResetEmail = async (email) => {
+  const data = { email };
+  return await apiCall({
+    url: '/api/auth/requestPasswordReset',
+    method: 'POST',
+    data
+  });
+};
+

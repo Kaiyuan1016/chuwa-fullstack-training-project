@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const nodemailer = require('nodemailer');
+const crypto = require('crypto');
 
 exports.signin = async function (req, res, next) {
   try {
@@ -69,4 +71,68 @@ exports.signup = async function (req, res, next) {
       message: err.message
     });
   }
+};
+
+
+
+exports.requestPasswordReset = async function(req, res, next) {
+    try {
+        const { email } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            // To prevent email enumeration, always return a successful response
+            return res.status(200).json({ message: 'If an account with that email exists, we will send a password reset link.' });
+        }
+
+        // Generate a reset token
+        const resetToken = crypto.randomBytes(20).toString('hex');
+        const hashedToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+        // Set the reset token and its expiration on the user model
+        user.passwordResetToken = hashedToken;
+        // Example: Set token to expire in 1 hour
+        user.passwordResetExpires = Date.now() + 3600000; 
+
+        await user.save();
+
+        // Construct reset URL
+        // Adjust to your frontend's password reset page URL
+        const resetUrl = `http://localhost:3000/password-reset/${resetToken}`;
+
+        // Email setup
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
+
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: email,
+            subject: 'Your Password Reset Link',
+            text: `To reset your password, please click on this link: ${resetUrl}`
+        };
+
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.error('Send Mail Error:', error);
+                return next({
+                    status: 500,
+                    message: 'Error sending password reset email.'
+                });
+            } else {
+                console.log('Email sent: ' + info.response);
+                return res.status(200).json({ message: 'Password reset link sent.' });
+            }
+        });
+    } catch (err) {
+        console.error('Password Reset Error:', err);
+        return next({
+            status: 500,
+            message: 'Error processing password reset request.'
+        });
+    }
 };
