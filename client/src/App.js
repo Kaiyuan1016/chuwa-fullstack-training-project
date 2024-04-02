@@ -11,7 +11,10 @@ import SignIn from './pages/SignIn';
 // import UpdatePassword from './pages/UpdatePassword';
 import AuthLayout from './components/Layout/AuthLayout';
 import NotFound from './pages/NotFound';
+
 import UpdatePassword from './pages/UpdatePassword';
+//import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ResetPassword from './pages/ResetPassword';
 
 export default function App () {
   return(
@@ -27,6 +30,7 @@ export default function App () {
         <Route path='/signin' element={<SignIn />} />
         {/* <Route path='/updatepassword' element={<UpdatePassword/>} /> */}
         <Route path='/updatepassword' element={<UpdatePassword />} />
+        <Route path="/password-reset/:token" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
 
       </Routes>

@@ -25,3 +25,17 @@ export const sendPasswordResetEmail = async (email) => {
   });
 };
 
+export const resetPassword = async ({ token, newPassword }) => {
+  const response = await fetch('/api/auth/resetPassword', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ token, newPassword }),
+  });
+  if (!response.ok) {
+    throw new Error('Failed to reset password');
+  }
+  return await response.json();
+};
+
