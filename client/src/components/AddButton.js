@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Button } from 'antd';
-import { updateCartInDatabase } from "../features/userSlice";
-import { addItemToCart, decrementItemQuantity } from '../features/cart/cartSlice';
+import { updateCartInDatabase } from "../features/cartSlice";
+import { addItemToCart, decrementItemQuantity, fetchCart } from '../features/cartSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 const AddToCartButton = ({product}) => {
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+  const userId = useSelector(state => state.user.user.id);
   const items = useSelector(state => state.cart.items);
   const item = useSelector(state => 
     state.cart.items.find(item => item.id === product._id),
@@ -13,6 +15,12 @@ const AddToCartButton = ({product}) => {
   );
 
   const[quantity, setQuantity] = useState(item ? item.quantity : 0);
+
+  useEffect(() => {
+    if(isAuthenticated && userId) {
+      dispatch(fetchCart(userId));
+    }
+  }, [userId])
 
   useEffect(() => {
     if(item) {
@@ -24,16 +32,15 @@ const AddToCartButton = ({product}) => {
   
   const handleAdd = useCallback(() => {
     dispatch(addItemToCart({id: product._id, quantity: 1, productInfo: product}));
-    dispatch(updateCartInDatabase({"cart": items}));
-
-  }, [dispatch, product, items]);
+    dispatch(updateCartInDatabase());
+  }, [dispatch, product]);
 
   const handleDecrement = useCallback(() => {
     if(quantity > 0) {
       dispatch(decrementItemQuantity({id: product._id, quantity: 1, productInfo: product}));
-      dispatch(updateCartInDatabase({"cart": items}));
+      dispatch(updateCartInDatabase());
     }
-  },[dispatch, product, quantity, items]);
+  },[dispatch, product, quantity,]);
 
   return (
     <div>

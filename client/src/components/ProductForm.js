@@ -8,7 +8,7 @@ import {
 } from 'antd';
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductAction, createProductAction, fetchProductByIdAction } from '../features/product/productsSlice';
+import { updateProductAction, createProductAction, fetchProductByIdAction } from '../features/productsSlice';
 
 const { TextArea } = Input;
 

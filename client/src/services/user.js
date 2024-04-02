@@ -7,3 +7,10 @@ export const updateCart = async (userId, cartItems) => {
         data: cartItems
     });
 };
+
+export const getCart = async (userId) => {
+    return await apiCall({
+        url: `api/user/${userId}/cart`,
+        method: 'GET',
+    });
+};

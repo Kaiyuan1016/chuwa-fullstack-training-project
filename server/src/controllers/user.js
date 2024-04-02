@@ -1,4 +1,5 @@
 const  User  = require('../models/User');
+const Product = require('../models/Product');
 
 updatePassword = async (req, res, next) => {
     const {email} = req.body;
@@ -15,9 +16,11 @@ updatePassword = async (req, res, next) => {
 
 updateCart = async (req, res, next) => {
     try {
+        const cartInfo = req.body;
+        const userId = req.params.userId;
         const user = await User.findByIdAndUpdate(
-            req.params.userId,
-            { $set: {cart: req.body.cart}}, 
+            userId,
+            {cart: cartInfo}, 
             {new: true}
         );
         res.status(200).json(user);
@@ -26,7 +29,25 @@ updateCart = async (req, res, next) => {
     }
 };
 
+getCart = async (req, res, next) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        const cartWithDetails = await Promise.all(user.cart.map(async (item) => {
+            const product = await Product.findById(item.productId);
+            return {
+              id: item.productId,
+              quantity: item.quantity,
+              productInfo: product
+            };
+          }));
+        res.status(200).json(cartWithDetails);
+    } catch(err) {
+        return next(err);
+    }
+};
+
 module.exports = {
     updatePassword,
-    updateCart
+    updateCart,
+    getCart
 };

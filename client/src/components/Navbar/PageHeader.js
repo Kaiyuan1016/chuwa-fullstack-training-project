@@ -12,8 +12,8 @@ const { Search } = Input;
 const PageHeader = () => {
     const [cartVisible, setCartVisible] = useState(false);
     const cart = useSelector(state => state.cart.items);
-    const itemCount = Array.isArray(cart) ? cart.reduce((total, item) => total += item.quantity, 0) : 0;
-    const totalPrice = Array.isArray(cart) ? cart.reduce((total, item) => total += item.productInfo.price * item.quantity, 0) : 0;
+    const itemCount = Array.isArray(cart) > 0 ? cart.reduce((total, item) => total += item.quantity, 0) : 0;
+    const totalPrice = Array.isArray(cart) > 0? cart.reduce((total, item) => total += item.productInfo.price * item.quantity, 0) : 0;
     
     const { user, isAuthenticated } = useSelector(state => state.user);
     const dispatch = useDispatch();

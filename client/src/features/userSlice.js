@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { signIn, signUp } from '../services/auth';
 import { addError, removeError } from './errorSlice';
-import { updateCart } from '../services/user';
-import { initializeCart } from './cart/cartSlice';
+import { initializeCart } from './cartSlice';
 
 export const initialState = {
   isAuthenticated: false,
@@ -17,11 +16,7 @@ export const authUser = createAsyncThunk(
     try {
       const user = await signIn(data);
       localStorage.setItem('token', user.token);
-      const initialCart = user.cart.map((item) => ({
-        id: item.productId,
-        quantity: item.quantity,
-        productInfo: item.productInfo,
-      }));
+      const initialCart = user.cart;
       localStorage.setItem('cart', initialCart);
       thunkAPI.dispatch(initializeCart(initialCart));
       thunkAPI.dispatch(removeError());
@@ -49,20 +44,6 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
-export const updateCartInDatabase = createAsyncThunk(
-  'currentUser/updateCartInDatabase',
-  async (cartItems, { getState, dispatch}) => {
-    const state = getState();
-    const userId = state.user.id;
-    try {
-      const response = await updateCart(userId, cartItems);
-      return response.data;
-    } catch(err) {
-      throw err;
-    }
-  }
-);
-
 const currentUserSlice = createSlice({
   name: 'currentUser',
   initialState,
@@ -76,6 +57,7 @@ const currentUserSlice = createSlice({
       state.user = {};
       state.status = 'idle';
       localStorage.removeItem('token');
+      localStorage.removeItem('cart');
     }
   },
   extraReducers: builder => {

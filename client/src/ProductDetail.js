@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { selectProductById, fetchProductByIdAction } from "./features/product/productsSlice";
+import { selectProductById, fetchProductByIdAction } from "./features/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const ProductDetail = () => {

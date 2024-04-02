@@ -20,7 +20,8 @@ exports.signin = async function (req, res, next) {
       const cartWithDetails = await Promise.all(cart.map(async (item) => {
         const product = await Product.findById(item.productId);
         return {
-          ...item.toObject(),
+          id: item.productId,
+          quantity: item.quantity,
           productInfo: product
         };
       }));

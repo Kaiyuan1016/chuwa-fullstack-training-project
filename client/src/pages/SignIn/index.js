@@ -31,7 +31,13 @@ export default function SignIn() {
   };
 
   return (
-    <div>
+    <div style={{
+      height: 'calc(100vh - 64px - 69px)',
+      padding: '0 50px',
+      width: '440px',
+      margin: '0 auto',
+      overflowY: 'auto'
+    }}>
       <AuthForm
         buttonText="Sign In"
         onSubmit={onSubmit}

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import ProductPagination from './Pagination';
 import ProductCard from './ProductCard';
-import { fetchProductsAction } from './features/product/productsSlice';
+import { fetchProductsAction } from './features/productsSlice';
 import { Select } from 'antd';
 
 function ProductsPage() {

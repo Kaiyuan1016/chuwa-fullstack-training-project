@@ -2,19 +2,18 @@ import React from 'react';
 import { Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import AddToCartButton from './AddButton';
-import { removeItemFromCart } from '../features/cart/cartSlice';
-import { updateCartInDatabase } from "../features/userSlice";
+import { removeItemFromCart } from '../features/cartSlice';
 
 const Cart = ({ visible, onClose }) => {
 
 	const cart = useSelector(state => state.cart.items);
-    const itemCount = Array.isArray(cart) ? cart.reduce((total, item) => total += item.quantity, 0) : 0;
-	const totalPrice = Array.isArray(cart) ? cart.reduce((total, item) => total += item.productInfo.price * item.quantity, 0) : 0;
+    const itemCount = Object.keys(cart) > 0? cart.reduce((total, item) => total += item.quantity, 0) : 0;
+	const totalPrice = Object.keys(cart) > 0 ? cart.reduce((total, item) => total += item.productInfo.price * item.quantity, 0) : 0;
     const dispatch = useDispatch();
   
 	const handleRemove = (productId) => {
 		dispatch(removeItemFromCart({id: productId}))
-		dispatch(updateCartInDatabase({"cart": cart}));
+		// dispatch(updateCartInDatabase({"cart": cart}));
 	};
 
 	return (

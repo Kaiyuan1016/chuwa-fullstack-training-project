@@ -2,8 +2,8 @@ import {
     createSlice,
     createAsyncThunk
 } from '@reduxjs/toolkit';
-import { fetchProducts, fetchProductById, createProduct, updateProduct } from '../../services/products';
-import { removeError, addError } from '../errorSlice';
+import { fetchProducts, fetchProductById, createProduct, updateProduct } from '../services/products';
+import { removeError, addError } from './errorSlice';
 
 const initialState = {
     products:[],

@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getCart, updateCart } from "../services/user";
 
 const initialState = {
     items: [], // [id: 'id_123', quantity: 3, productInfo: {...}] 3 quantity of item id_123 in cart
@@ -9,6 +10,34 @@ export const getItemQuantity = (state, itemId) => {
     const item = state.items.find(item => item.id === itemId);
     return item !== undefined ? item.quantity : 0;
 };
+
+export const fetchCart = (userId) => async (dispatch) => {
+    try {
+      const cartData = await getCart(userId); // assuming this function fetches cart data from server
+      dispatch(initializeCart(cartData));
+    } catch (error) {
+      console.log('Error fetch cart:', error);
+      return undefined;
+    }
+};
+
+export const updateCartInDatabase = createAsyncThunk(
+    'currentUser/updateCartInDatabase',
+    async (_, { getState, dispatch}) => {
+      const state = getState();
+      const cartItems = state.cart.items.map((item) => ({
+          productId: item.id,
+          quantity: item.quantity
+        }));
+      const userId = state.user.user.id;
+      try {
+        const response = await updateCart(userId, cartItems);
+        return response.data;
+      } catch(err) {
+        throw err;
+      }
+    }
+);
 
 const cartSlice = createSlice({
     name: 'cart',
@@ -27,6 +56,15 @@ const cartSlice = createSlice({
             }
             localStorage.setItem('cart', JSON.stringify(state.items));
         },
+        // prepare(payload) {
+        //     return {
+        //       payload,
+        //       meta: {
+        //         thunk: 'updateCartInDatabase'
+        //       }
+        //     }
+        //   }
+        // },
         decrementItemQuantity(state, action) {
             const {id, quantity, productInfo} = action.payload;
             const itemToRemoveIdx = state.items.findIndex(item => item.id === id);
