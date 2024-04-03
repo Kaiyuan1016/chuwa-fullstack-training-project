@@ -34,7 +34,7 @@ const PageHeader = () => {
                 <Search placeholder='Search' buttonstyle={{ backgroundColor: 'white', border:'white'}} />
             </div>
             <div className="user-info">
-                <div className="user-logo" style={{padding: '10px'}}>
+                <div className="user-logo" style={{ padding: '10px' }}>
                     {isAuthenticated ? (
                         <p onClick={() => dispatch(logOutUser())}>Log Out</p>
                     ) :
@@ -43,15 +43,9 @@ const PageHeader = () => {
                     )}
                 </div>
                 <div className="cart-info">
-                    <button
-                        onClick={toggleCartVisibility}
-                        style={{
-                            backgroundColor: 'transparent',
-                            border: 'none',
-                            padding: 0}}
-                    >
+                    <button onClick={toggleCartVisibility} style={{ backgroundColor: 'transparent', border: 'none', padding: 0 }}>
                         <Badge color="secondary" badgeContent={itemCount}>
-                            <ShoppingCartIcon />{" "}
+                            <ShoppingCartIcon />
                         </Badge>
                     </button>
                     <div className="cart-total-price">${totalPrice}</div>

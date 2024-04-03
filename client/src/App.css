@@ -13,53 +13,77 @@ body{
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
-  background-color: white;
   padding: 20px;
+  justify-content: center;
 }
 
 .card {
-  width: 242px;
-  height: 303px;
-  /* top: 222px; */
-  padding: 10px;
-  border-radius: 0%;
-}
-
-.info-container {
-  width: 191px;
-  height: 45px;
-  gap: 0%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* This will push the button to the bottom */
+  padding: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background-color: white;
+  margin-bottom: 20px; /* Add space between cards */
+  width:242px;
+  height:303px;
+  overflow: hidden;
 }
 
 .card-img-top {
-  width: 218px;
-  height: 198px;
-  object-fit: cover;
+  max-height:120px;
+  width: 100%;
+  object-fit: contain;
 }
 
-.button-list {
+.card-body {
   display: flex;
-  flex-direction: row;
-  gap: 6px;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between; 
+  flex:1;
+  padding:0px 10px;
+}
+
+.card-info {
+  margin-bottom:0px;
+}
+
+.card-actions {
+  display:auto;
+  justify-content: center;
+  margin-top: auto;
+  width:100%;
+}
+
+.button-base, .edit-button {
+  width: 100%; 
+  margin-top: 0px; 
+}
+
+.info-container, .button-list, .detail-btn-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .button-base {
-  width: 110px;
-  height: 26px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  padding: 8px 12px;
+  width: 100%;
   border-radius: 4px;
+  cursor: pointer;
+  margin-top: 0px;
 }
 
 .add-button {
   background-color: #5048E5;
   color: white;
+  width: 100%; 
 }
 
-.edit-button {
-  border: 1px #CCCCCC solid;
+.edit-button, .out-of-stock-btn {
+  border: 1px solid #CCCCCC;
 }
 
 .ant-pagination-item,
@@ -142,16 +166,106 @@ body{
 }
 .detail-btn-list {
   display: flex;
-  gap:10px
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.out-of-stock-btn {
-  width: 76px;
-  height: 30px;
-  border-radius: 4px;
-  background-color: rgba(234, 61, 47, 0.13);
-  color: #EA3D2F;
-  font-size: 12px; /* Adjust font size as needed */
-  white-space: nowrap; /* Prevent text from wrapping */
-  border: none;
+.products-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.products-actions {
+  display: flex;
+  align-items: center;
+}
+
+.ant-select {
+  width: 179px;
+  margin-right: 20px;
+}
+
+@media (max-width: 1200px) {
+  .product-list {
+    grid-template-columns: repeat(4, minmax(240px, 1fr));
+  }
+  .card {
+    margin-bottom: 10px; /* Less space between cards on smaller screens */
+  }
+
+  /* Product actions stacking */
+  .products-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ant-select {
+    width: 100%; 
+    margin-bottom: 10px; 
+  }
+}
+
+@media (max-width: 1000px) {
+  .product-list {
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+  }
+  .card {
+    margin-bottom: 10px; /* Less space between cards on smaller screens */
+  }
+
+  /* Product actions stacking */
+  .products-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ant-select {
+    width: 100%; 
+    margin-bottom: 10px; 
+  }
+}
+
+@media (max-width: 800px) {
+  .product-list {
+    grid-template-columns: repeat(2, minmax(240px, 1fr));
+  }
+  .card {
+    margin-bottom: 10px; /* Less space between cards on smaller screens */
+  }
+
+  /* Product actions stacking */
+  .products-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ant-select {
+    width: 100%; 
+    margin-bottom: 10px; 
+  }
+}
+
+@media (max-width: 576px) {
+  .product-list {
+    grid-template-columns: repeat(1, minmax(240px, 1fr));
+  }
+
+  .products-container {
+    padding: 0 10px; 
+  }
+  .card {
+    margin-bottom: 10px; /* Less space between cards on smaller screens */
+  }
+
+  body, .products-header h4, .products-container {
+    font-size: 14px;
+  }
+
+  .pagination-container {
+    align-self: center;
+    padding: 20px;
+  }
 }

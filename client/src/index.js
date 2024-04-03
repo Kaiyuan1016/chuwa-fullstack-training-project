@@ -6,10 +6,9 @@ import reportWebVitals from './reportWebVitals';
 import store from './features/store';
 import { Provider } from 'react-redux';
 import PageHeader from './components/Navbar/PageHeader';
-
+import Footer from './components/Footer';
 import {jwtDecode} from 'jwt-decode';
 import { setCurrentUser } from './features/userSlice';
-
 import { BrowserRouter} from 'react-router-dom';
 
 if (localStorage.getItem('token')) {
@@ -24,6 +23,7 @@ root.render(
       <div style={{ padding:'50px' }}>
         <App />
       </div>
+      <Footer /> 
     </Provider>
   </BrowserRouter>
 );
